@@ -91,7 +91,7 @@ const Insights = () => {
                 >
                     Export as CSV
                 </Button>
-                <div style={{ marginBottom: '40px', height: '300px', width: '100%' }}>
+                <div style={{ marginBottom: '40px', height: '250px', width: '100%' }}>
                     <h5 style={{ color: '#4a90e2', fontWeight: 'bold' }}>Category-Wise Breakdown</h5>
                     <Pie
                         data={{
@@ -105,12 +105,12 @@ const Insights = () => {
                         }}
                         options={{
                             responsive: true,
-                            maintainAspectRatio: false,
+                            maintainAspectRatio: true,
                             plugins: {
                                 legend: {
                                     position: 'bottom',
                                     labels: {
-                                        font: { size: 14, family: 'Roboto' },
+                                        font: { size: 12, family: 'Roboto' },
                                         color: '#4a90e2',
                                     },
                                 },
@@ -119,7 +119,7 @@ const Insights = () => {
                         style={{ height: '100%', width: '100%' }}
                     />
                 </div>
-                <div style={{ marginBottom: '40px', height: '300px', width: '100%' }}>
+                <div style={{ marginBottom: '40px', height: '250px', width: '100%' }}>
                     <h5 style={{ color: '#4a90e2', fontWeight: 'bold' }}>Monthly Trends</h5>
                     <Line
                         data={{
@@ -141,7 +141,7 @@ const Insights = () => {
                         }}
                         options={{
                             responsive: true,
-                            maintainAspectRatio: false,
+                            maintainAspectRatio: true,
                             plugins: {
                                 legend: { position: 'top' },
                                 tooltip: { mode: 'index', intersect: false },
@@ -154,7 +154,7 @@ const Insights = () => {
                         style={{ height: '100%', width: '100%' }}
                     />
                 </div>
-                <div style={{ arginBottom: '40px', height: '300px', width: '300px'}}>
+                <div style={{ marginBottom: '40px', height: '250px', width: '100%' }}>
                     <h5 style={{ color: '#4a90e2', fontWeight: 'bold' }}>Income vs Expense</h5>
                     <Bar
                         data={{
@@ -169,7 +169,7 @@ const Insights = () => {
                         }}
                         options={{
                             responsive: true,
-                            maintainAspectRatio: false,
+                            maintainAspectRatio: true,
                             plugins: {
                                 legend: { display: false },
                             },
@@ -178,14 +178,14 @@ const Insights = () => {
                                     beginAtZero: true,
                                     ticks: {
                                         font: {
-                                            size: 14,
+                                            size: 12,
                                         },
                                     },
                                 },
                                 x: {
                                     ticks: {
                                         font: {
-                                            size: 14,
+                                            size: 12,
                                         },
                                     },
                                 },
@@ -196,12 +196,11 @@ const Insights = () => {
                             },
                         }}
                         style={{
-                            height: '100%', // Ensures it scales to the container
+                            height: '100%',
                             width: '100%',
                         }}
                     />
                 </div>
-
             </div>
         </div>
     );

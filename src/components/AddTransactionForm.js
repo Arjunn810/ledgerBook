@@ -93,12 +93,12 @@ const AddTransactionForm = () => {
                             value={type}
                             onChange={(e) => setType(e.target.value)}
                             style={{
-                                marginBottom: '10px',
-                                borderRadius: '12px',
-                                padding: '12px',
-                                fontSize: '16px',
-                                border: '1px solid #ccc',
-                                backgroundColor: '#ffffff',
+                                width: '100%',
+                                borderRadius: '8px',
+                                padding: '4%',
+                                fontSize: 'clamp(14px, 4vw, 18px)',
+                                marginBottom: '5%',
+                                border: '1px solid #ddd',
                             }}
                         >
                             <option value="income">Income</option>
@@ -114,14 +114,13 @@ const AddTransactionForm = () => {
                             placeholder="Enter amount"
                             value={amount}
                             onChange={(e) => setAmount(e.target.value)}
-                            isInvalid={!!errors.amount}
                             style={{
-                                marginBottom: '10px',
-                                borderRadius: '12px',
-                                padding: '12px',
-                                fontSize: '16px',
-                                border: '1px solid #ccc',
-                                backgroundColor: '#ffffff',
+                                width: '100%',
+                                borderRadius: '8px',
+                                padding: '4%',
+                                fontSize: 'clamp(14px, 4vw, 18px)',
+                                marginBottom: '5%',
+                                border: '1px solid #ddd',
                             }}
                         />
                         {errors.amount && (
@@ -213,11 +212,11 @@ const AddTransactionForm = () => {
                                 className="form-control"
                                 style={{
                                     width: '100%',
-                                    borderRadius: '12px',
-                                    padding: '12px',
-                                    fontSize: '16px',
-                                    border: '1px solid #ccc',
-                                    backgroundColor: '#ffffff',
+                                    borderRadius: '8px',
+                                    padding: '4%',
+                                    fontSize: 'clamp(14px, 4vw, 18px)',
+                                    marginBottom: '5%',
+                                    border: '1px solid #ddd',
                                 }}
                             />
                         </div>
@@ -225,7 +224,6 @@ const AddTransactionForm = () => {
                             <Form.Text className="text-danger">{errors.transactionDate}</Form.Text>
                         )}
                     </Form.Group>
-
                     <Form.Group className="mb-4">
                         <Form.Check
                             type="checkbox"
@@ -256,26 +254,24 @@ const AddTransactionForm = () => {
                         )}
                     </Form.Group>
                     <Button
-                        className="mt-4"
-                        variant="primary"
                         type="submit"
                         style={{
-                            width: '50%',
-                            padding: '10px',
-                            fontSize: '20px',
-                            borderRadius: '15px',
+                            width: '100%',
+                            padding: '4%',
+                            fontSize: 'clamp(16px, 5vw, 20px)',
+                            borderRadius: '10px',
                             backgroundColor: '#4a90e2',
-                            border: 'none',
+                            color: '#fff',
                             fontWeight: 'bold',
-                            letterSpacing: '1.2px',
-                            marginBottom: '15px',
+                            border: 'none',
+                            marginTop: '20px',
                         }}
                     >
                         ADD TRANSACTION
                     </Button>
                 </Form>
             </div>
-        </div>
+        </div >
     );
 };
 
