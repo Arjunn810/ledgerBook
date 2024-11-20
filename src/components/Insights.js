@@ -2,6 +2,7 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { Bar, Line, Pie } from 'react-chartjs-2';
+import { ThemeContext } from '../context/ThemeContext';
 import { TransactionsContext } from '../context/TransactionsContext';
 
 // Register all Chart.js components
@@ -9,6 +10,7 @@ ChartJS.register(...registerables);
 
 const Insights = () => {
     const { transactions } = useContext(TransactionsContext);
+    const { theme } = useContext(ThemeContext);
 
     const incomeData = transactions
         .filter((t) => t.type === 'income')
@@ -52,6 +54,8 @@ const Insights = () => {
         link.click();
     };
 
+    const isDarkTheme = theme === 'dark';
+
     return (
         <div className="container mt-5">
             <div
@@ -60,14 +64,15 @@ const Insights = () => {
                     padding: '40px',
                     borderRadius: '20px',
                     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
-                    backgroundColor: '#f9f9f9',
+                    backgroundColor: isDarkTheme ? '#1e1e1e' : '#f9f9f9',
+                    color: isDarkTheme ? '#f0f0f0' : '#333333',
                 }}
             >
                 <h3
                     style={{
                         textAlign: 'center',
                         marginBottom: '30px',
-                        color: '#4a90e2',
+                        color: isDarkTheme ? '#90caf9' : '#4a90e2',
                         fontWeight: 'bold',
                         letterSpacing: '1.2px',
                     }}
@@ -92,7 +97,14 @@ const Insights = () => {
                     Export as CSV
                 </Button>
                 <div style={{ marginBottom: '40px', height: '250px', width: '100%' }}>
-                    <h5 style={{ color: '#4a90e2', fontWeight: 'bold' }}>Category-Wise Breakdown</h5>
+                    <h5
+                        style={{
+                            color: isDarkTheme ? '#90caf9' : '#4a90e2',
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        Category-Wise Breakdown
+                    </h5>
                     <Pie
                         data={{
                             labels: Object.keys(categoryData),
@@ -111,16 +123,22 @@ const Insights = () => {
                                     position: 'bottom',
                                     labels: {
                                         font: { size: 12, family: 'Roboto' },
-                                        color: '#4a90e2',
+                                        color: isDarkTheme ? '#f0f0f0' : '#333333',
                                     },
                                 },
                             },
                         }}
-                        style={{ height: '100%', width: '100%' }}
                     />
                 </div>
                 <div style={{ marginBottom: '40px', height: '250px', width: '100%' }}>
-                    <h5 style={{ color: '#4a90e2', fontWeight: 'bold' }}>Monthly Trends</h5>
+                    <h5
+                        style={{
+                            color: isDarkTheme ? '#90caf9' : '#4a90e2',
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        Monthly Trends
+                    </h5>
                     <Line
                         data={{
                             labels: trendLabels,
@@ -146,16 +164,18 @@ const Insights = () => {
                                 legend: { position: 'top' },
                                 tooltip: { mode: 'index', intersect: false },
                             },
-                            animation: {
-                                duration: 1000,
-                                easing: 'easeOutQuart',
-                            },
                         }}
-                        style={{ height: '100%', width: '100%' }}
                     />
                 </div>
                 <div style={{ marginBottom: '40px', height: '250px', width: '100%' }}>
-                    <h5 style={{ color: '#4a90e2', fontWeight: 'bold' }}>Income vs Expense</h5>
+                    <h5
+                        style={{
+                            color: isDarkTheme ? '#90caf9' : '#4a90e2',
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        Income vs Expense
+                    </h5>
                     <Bar
                         data={{
                             labels: ['Income', 'Expense'],
@@ -179,6 +199,7 @@ const Insights = () => {
                                     ticks: {
                                         font: {
                                             size: 12,
+                                            color: isDarkTheme ? '#f0f0f0' : '#333333',
                                         },
                                     },
                                 },
@@ -186,18 +207,11 @@ const Insights = () => {
                                     ticks: {
                                         font: {
                                             size: 12,
+                                            color: isDarkTheme ? '#f0f0f0' : '#333333',
                                         },
                                     },
                                 },
                             },
-                            animation: {
-                                duration: 1000,
-                                easing: 'easeOutQuart',
-                            },
-                        }}
-                        style={{
-                            height: '100%',
-                            width: '100%',
                         }}
                     />
                 </div>

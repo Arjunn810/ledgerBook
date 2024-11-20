@@ -1,21 +1,35 @@
-import React, { createContext, useReducer } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useEffect, useReducer } from 'react';
 
-// Create the Transactions Context
 export const TransactionsContext = createContext();
 
-// Define the Reducer for Transactions
 const transactionsReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_TRANSACTION':
-            return [...state, action.payload];
+            const updatedState = [...state, action.payload];
+            AsyncStorage.setItem('transactions', JSON.stringify(updatedState));
+            return updatedState;
+        case 'DELETE_TRANSACTION':
+            const filteredState = state.filter(t => t.id !== action.payload);
+            AsyncStorage.setItem('transactions', JSON.stringify(filteredState));
+            return filteredState;
         default:
             return state;
     }
 };
 
-// Create the Provider Component
 export const TransactionsProvider = ({ children }) => {
     const [transactions, dispatch] = useReducer(transactionsReducer, []);
+
+    useEffect(() => {
+        const loadTransactions = async () => {
+            const storedTransactions = await AsyncStorage.getItem('transactions');
+            if (storedTransactions) {
+                dispatch({ type: 'INIT', payload: JSON.parse(storedTransactions) });
+            }
+        };
+        loadTransactions();
+    }, []);
 
     return (
         <TransactionsContext.Provider value={{ transactions, dispatch }}>

@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Form, Modal, ProgressBar } from 'react-bootstrap';
+import { ThemeContext } from '../context/ThemeContext';
 import { TransactionsContext } from '../context/TransactionsContext';
 
 const Dashboard = () => {
     const { transactions } = useContext(TransactionsContext);
+    const { theme } = useContext(ThemeContext);
+
     const [budget, setBudget] = useState(0); // Budget goal
     const [spent, setSpent] = useState(0); // Total spent
     const [showModal, setShowModal] = useState(false); // Modal visibility for setting budget
@@ -44,15 +47,16 @@ const Dashboard = () => {
                 style={{
                     padding: '5%',
                     borderRadius: '15px',
-                    boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
-                    backgroundColor: '#f9f9f9',
+                    boxShadow: theme === 'light' ? '0 6px 12px rgba(0, 0, 0, 0.15)' : '0 6px 12px rgba(255, 255, 255, 0.1)',
+                    backgroundColor: theme === 'light' ? '#ffffff' : '#1e1e1e',
+                    color: theme === 'light' ? '#333333' : '#f0f0f0',
                 }}
             >
                 <h3
                     style={{
                         textAlign: 'center',
                         marginBottom: '20px',
-                        color: '#4a90e2',
+                        color: theme === 'light' ? '#4a90e2' : '#90caf9',
                         fontWeight: 'bold',
                         fontSize: 'clamp(18px, 4vw, 24px)',
                     }}
@@ -61,7 +65,13 @@ const Dashboard = () => {
                 </h3>
 
                 <div style={{ marginBottom: '20px' }}>
-                    <h5 style={{ fontWeight: 'bold', color: '#4a90e2', fontSize: 'clamp(14px, 3vw, 18px)' }}>
+                    <h5
+                        style={{
+                            fontWeight: 'bold',
+                            color: theme === 'light' ? '#4a90e2' : '#90caf9',
+                            fontSize: 'clamp(14px, 3vw, 18px)',
+                        }}
+                    >
                         Monthly Budget Progress
                     </h5>
                     <ProgressBar
@@ -71,6 +81,7 @@ const Dashboard = () => {
                             height: '25px',
                             borderRadius: '12px',
                             marginBottom: '10px',
+                            backgroundColor: theme === 'light' ? '#e0e0e0' : '#333333',
                         }}
                     />
                     <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
@@ -88,6 +99,10 @@ const Dashboard = () => {
                         borderRadius: '10px',
                         width: 'fit-content',
                         alignSelf: 'center',
+                        backgroundColor: theme === 'light' ? '#4caf50' : '#90caf9',
+                        color: '#ffffff',
+                        border: 'none',
+                        boxShadow: theme === 'light' ? '0 4px 8px rgba(0, 0, 0, 0.2)' : '0 4px 8px rgba(255, 255, 255, 0.1)',
                     }}
                     onClick={() => setShowModal(true)}
                 >
@@ -103,12 +118,12 @@ const Dashboard = () => {
                 style={{
                     borderRadius: '15px',
                     overflow: 'hidden',
-                    boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
+                    boxShadow: theme === 'light' ? '0 8px 16px rgba(0, 0, 0, 0.2)' : '0 8px 16px rgba(255, 255, 255, 0.1)',
                 }}
             >
                 <Modal.Header
                     style={{
-                        backgroundColor: '#4a90e2',
+                        backgroundColor: theme === 'light' ? '#4a90e2' : '#333333',
                         borderBottom: 'none',
                         padding: '25px',
                     }}
@@ -116,7 +131,7 @@ const Dashboard = () => {
                     <Modal.Title
                         style={{
                             fontWeight: 'bold',
-                            color: '#fff',
+                            color: '#ffffff',
                             fontSize: '20px',
                             textTransform: 'uppercase',
                             letterSpacing: '1.2px',
@@ -128,7 +143,8 @@ const Dashboard = () => {
                 <Modal.Body
                     style={{
                         padding: '30px',
-                        backgroundColor: '#f9f9f9',
+                        backgroundColor: theme === 'light' ? '#f9f9f9' : '#1e1e1e',
+                        color: theme === 'light' ? '#333333' : '#f0f0f0',
                     }}
                 >
                     <Form>
@@ -136,7 +152,7 @@ const Dashboard = () => {
                             <Form.Label
                                 style={{
                                     fontWeight: 'bold',
-                                    color: '#4a90e2',
+                                    color: theme === 'light' ? '#4a90e2' : '#90caf9',
                                     fontSize: 'clamp(14px, 3vw, 16px)',
                                     marginBottom: '10px',
                                 }}
@@ -153,8 +169,8 @@ const Dashboard = () => {
                                     padding: '12px',
                                     fontSize: '16px',
                                     border: '1px solid #ccc',
-                                    backgroundColor: '#ffffff',
-                                    boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)',
+                                    backgroundColor: theme === 'light' ? '#ffffff' : '#333333',
+                                    color: theme === 'light' ? '#333333' : '#f0f0f0',
                                 }}
                             />
                         </Form.Group>
@@ -164,7 +180,7 @@ const Dashboard = () => {
                     style={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                        backgroundColor: '#f9f9f9',
+                        backgroundColor: theme === 'light' ? '#f9f9f9' : '#1e1e1e',
                         borderTop: 'none',
                         padding: '20px 30px',
                     }}
@@ -173,14 +189,13 @@ const Dashboard = () => {
                         variant="secondary"
                         onClick={() => setShowModal(false)}
                         style={{
-                            backgroundColor: '#cccccc',
-                            color: '#333333',
+                            backgroundColor: theme === 'light' ? '#cccccc' : '#555555',
+                            color: theme === 'light' ? '#333333' : '#ffffff',
                             padding: '10px 30px',
                             borderRadius: '12px',
                             fontSize: '16px',
                             fontWeight: 'bold',
                             border: 'none',
-                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                         }}
                     >
                         Close
@@ -189,14 +204,13 @@ const Dashboard = () => {
                         variant="primary"
                         onClick={handleSaveBudget}
                         style={{
-                            backgroundColor: '#4a90e2',
+                            backgroundColor: theme === 'light' ? '#4caf50' : '#90caf9',
                             color: '#ffffff',
                             padding: '10px 30px',
                             borderRadius: '12px',
                             fontSize: '16px',
                             fontWeight: 'bold',
                             border: 'none',
-                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                         }}
                     >
                         Save Budget
